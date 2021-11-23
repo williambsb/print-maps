@@ -1,28 +1,7 @@
-/*
- * Print Maps - High-resolution maps in the browser, for printing
- * Copyright (c) 2015-2020 Matthew Petroff
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+
  
-mapboxgl.accessToken = '';
-var mapTilerAccessToken = '';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ29vZGZ5IiwiYSI6ImNrcTE0eW82bDA2Nngyd211cndpZXZsZHQifQ.V9xvc1UXjeKA5XdE_-UStg';
+var mapTilerAccessToken = '948FlWA5DA6mDaK5dIFl';
 
 var form = document.getElementById('config');
 
@@ -78,9 +57,17 @@ try {
         pitch: 0,
         style: style
     });
+
+    map?.on('load', () => { 
+       map.setLayoutProperty('mapeando-label-rua','visibility','visible')
+       map.setLayoutProperty('mapeando--cidade','visibility','visible')
+    })
     map.addControl(new mapboxgl.NavigationControl());
+    
+    
     map.on('moveend', updateLocationInputs).on('zoomend', updateLocationInputs);
     updateLocationInputs();
+    
 } catch (e) {
     var mapContainer = document.getElementById('map');
     mapContainer.parentNode.removeChild(mapContainer);
